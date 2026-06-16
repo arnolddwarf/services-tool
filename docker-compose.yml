@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: services-tool-backend:latest
+    container_name: services-tool-backend
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - DATABASE_PATH=/data/database.sqlite
+    volumes:
+      - ./sqlite-data:/data
+    ports:
+      - "3001:3001"
+
+  frontend:
+    image: nginx:alpine
+    container_name: frontend-server
+    restart: unless-stopped
+    ports:
+      - "8084:80"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html
+    depends_on:
+      - backend

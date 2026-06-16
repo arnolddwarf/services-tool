@@ -42,7 +42,7 @@ ChartJS.register(
   Legend
 );
 
-const API_BASE = `${window.location.protocol}//${window.location.hostname}:3001/api`;
+const API_BASE = '/api';
 
 const legendPaddingPlugin = {
   id: 'customLegendPadding',
